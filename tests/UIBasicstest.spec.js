@@ -1,14 +1,23 @@
-const {test} = require('@playwright/test');
+const {test, expect} = require('@playwright/test');
+const { timeout } = require('../playwright.config');
 
 
-test('First Playwright test', async ()=> {
-
-//playwright code can be written here
-//Step 1 - open browser
-// having the 'await' keyword after every step to ensure steps are properly complete before the next step is executed 
-//also 'async' function is requried for await to function accordingly
-//Step 2 - enter U/P (takes 2 seconds)
-//Step 3 - click
-// JS is asychronus meaning no gaurentee it will be executed step by step but rather will be executed at the same time
+test('Browser Context Playwright test', async ({browser})=> 
+{
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto("https://github.com/sk4835/PlayWrightTutorial");
+    console.log(await page.title());
+    await expect(page).toHaveTitle("GitHub - sk4835/PlayWrightTutorial");
 
 });
+
+test('Page Playwright test', async ({page})=> 
+    {
+        await page.goto("https://google.com");
+        //get title and put an assertion to validate it is correct
+        console.log(await page.title());
+        await expect(page).toHaveTitle("Google");
+
+    
+    });
