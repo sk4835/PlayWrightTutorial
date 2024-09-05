@@ -2,13 +2,17 @@ const {test, expect} = require('@playwright/test');
 const { timeout } = require('../playwright.config');
 
 
-test('Browser Context Playwright test', async ({browser})=> 
+test.only('Validate error message on incorrect login', async ({browser})=> 
 {
     const context = await browser.newContext();
     const page = await context.newPage();
-    await page.goto("https://github.com/sk4835/PlayWrightTutorial");
+    await page.goto("https://www.saucedemo.com/");
     console.log(await page.title());
-    await expect(page).toHaveTitle("GitHub - sk4835/PlayWrightTutorial");
+    await page.locator('#user-name').fill("rahulshetty@gmail.com");
+    await page.locator('#password').fill("learning");
+    await page.locator("input[value='Login']").click();
+    await expect(page.locator(".error-button")).toBeVisible();
+
 
 });
 
