@@ -56,13 +56,3 @@ test.only('Validate inventory list', async ({browser})=>
         
     
     });
-
-test('Page Playwright test', async ({page})=> 
-    {
-        await page.goto("https://google.com");
-        //get title and put an assertion to validate it is correct
-        console.log(await page.title());
-        await expect(page).toHaveTitle("Google");
-
-    
-    });
