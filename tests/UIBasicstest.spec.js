@@ -29,7 +29,7 @@ test('Validate error message on incorrect login', async ({browser})=>
 
 });
 
-test.only('Validate inventory list', async ({browser})=> 
+test('Validate inventory list', async ({browser})=> 
     {
     
     
