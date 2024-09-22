@@ -93,12 +93,13 @@ test('Validate inventory list', async ({browser})=>
     
     });
 
-    test.only('@Web Client App login', async ({ page }) => {
+    test('@Web Client App login', async ({ page }) => {
         //js file- Login js, DashboardPage
         const email = "anshika@gmail.com";
         const productName = 'zara coat 3';
         const itemList = page.locator(".card-body b")
         const products = page.locator(".card-body");
+        const blinkText = page.locator('//*[@id="products"]/div[1]/div[1]/label')
         await page.goto("https://rahulshettyacademy.com/client");
         await page.locator("#userEmail").fill(email);
         await page.locator("#userPassword").type("Iamking@000");
@@ -106,14 +107,14 @@ test('Validate inventory list', async ({browser})=>
         //await page.waitForLoadState('networkidle');
         await itemList.first().waitFor();
         const titles = await itemList.allTextContents();
-        console.log(titles);
-        await page.pause();
-        await page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]").click();
-        await expect(page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]")).toBeChecked();
-        console.log(await page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]").isChecked());
-        await page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]").uncheck();
-        expect(await page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]").isChecked()).toBeFalsy();
-
-      
+        //console.log(titles);
+        // await page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]").click();
+        // await expect(page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]")).toBeChecked();
+        // console.log(await page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]").isChecked());
+        // await page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]").uncheck();
+        // expect(await page.locator("#sidebar > form > div:nth-child(3) > div:nth-child(3) > input[type=checkbox]").isChecked()).toBeFalsy();
+        //await page.pause();
+        await expect(blinkText).toHaveAttribute("class","m-2 blink_me");
+        console.log(await blinkText.textContent());
      });
 
