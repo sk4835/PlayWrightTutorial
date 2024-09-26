@@ -39,9 +39,13 @@ const { escape } = require('querystring');
         }
         await naviButton.nth(2).click();
         expect(await page.locator(".heading h1")).toHaveText("My Cart");
+        await page.locator(".cartSection").locator(".itemImg").waitFor();
         console.log(await page.locator(".heading h1").textContent());
+        //await page.pause();
+        console.log(await page.locator("h3:has-text('ZARA COAT 3')").isVisible());
+        const tfVal = page.locator("h3:has-text('ZARA COAT 3')").isVisible();
+        expect(tfVal).toBeTruthy();
 
-        
-
+    
      });
 
