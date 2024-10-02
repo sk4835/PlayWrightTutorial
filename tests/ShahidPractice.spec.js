@@ -22,11 +22,8 @@ const exp = require('constants');
         await userName.fill(email);
         await passField.fill(password);
         await loginButton.click();
-        //console.log(await page.title());
-        //expect(await page.getByTitle("Let's Shop"));
-        //await page.pause();
-        
         await products.first().waitFor();
+
         const count = await products.count();
         for (let i = 0; i < count; i++)
         {    
@@ -43,12 +40,11 @@ const exp = require('constants');
         await naviButton.nth(2).click();
         expect(await page.locator(".heading h1")).toHaveText("My Cart");
         await page.locator(".cartSection").locator(".itemImg").waitFor();
+        //console outputs to help visually see values successfully are outputed
         console.log(await page.locator(".heading h1").textContent());
-        //await page.pause();
         console.log(await page.locator("h3:has-text('ZARA COAT 3')").isVisible());
         const bool = await page.locator("h3:has-text('ZARA COAT 3')").isVisible();
         expect(bool).toBeTruthy();
-
         await page.locator("button:has-text('Checkout')").click();
         await page.locator(".payment").waitFor();
         await paymentFields.nth(0).fill("");
