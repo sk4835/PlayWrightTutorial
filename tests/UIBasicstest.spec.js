@@ -4,8 +4,6 @@ const { timeout } = require('../playwright.config');
 
 test('Validate error message on incorrect login', async ({browser})=> 
 {
-
-
     const context = await browser.newContext();
     const page = await context.newPage();
 
