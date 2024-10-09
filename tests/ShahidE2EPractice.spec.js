@@ -132,6 +132,7 @@ test.only('Validate Order Id displays in Order History', async ({ page }) => {
         }
     }
     const orderIDDetailsPage = await page.locator(".col-text").textContent();
+    await page.screenshot({path: 'tests/screenshots/ValidationOrderID.png'});
     expect(response.OrderNum.includes(orderIDDetailsPage)).toBeTruthy();
     console.log(orderIDDetailsPage);
     });
