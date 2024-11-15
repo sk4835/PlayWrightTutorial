@@ -1,5 +1,10 @@
+/*
+  This is a work in progress for the NetworkResponsePractice.spec.js file.
+*/
+
+
 const { test, expect, request } = require('@playwright/test');
-const { APiUtils } = require('../utils/APiUtils');
+const { APIUtils } = require('./utils/APIUtils');
 const loginPayLoad = { userEmail: "anshika@gmail.com", userPassword: "Iamking@000" };
 const orderPayLoad = { orders: [{ country: "India", productOrderedId: "6262e95ae26b7e1a10e89bf0" }] };
 const fakePayLoadOrders = { data: [], message: "No Orders" };
@@ -7,14 +12,13 @@ const fakePayLoadOrders = { data: [], message: "No Orders" };
 let response;
 test.beforeAll(async () => {
   const apiContext = await request.newContext();
-  const apiUtils = new APiUtils(apiContext, loginPayLoad);
-  response = await apiUtils.createOrder(orderPayLoad);
+  const APIUtilsInstance = new APIUtils(apiContext, loginPayLoad);
+  response = await APIUtilsInstance.createOrder(orderPayLoad);
  
 })
  
- 
 //create order is success
-test('@SP Place the order', async ({ page }) => {
+test('SP Place the order', async ({ page }) => {
   page.addInitScript(value => {
  
     window.localStorage.setItem('token', value);
@@ -39,7 +43,5 @@ test('@SP Place the order', async ({ page }) => {
   await page.waitForResponse("https://rahulshettyacademy.com/api/ecom/order/get-orders-for-customer/*")
  
   console.log(await page.locator(".mt-4").textContent());
- 
- 
  
 });

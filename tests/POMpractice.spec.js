@@ -5,23 +5,21 @@ const { escape } = require('querystring');
 const { type } = require('os');
 const exp = require('constants');
 
-    // UI only E2E test 
+    // UI only E2E test converted with POM
     test.only(' Client App complete user flow', async ({ page }) => {
         //js file- Login js, DashboardPage
         const email = "anshika@gmail.com";
         const password = "Iamking@000"
-        const userName = page.locator("#userEmail")
-        const passField = page.locator("#userPassword")
-        const loginButton = page.locator("#login")
-        const products = page.locator(".card-body");
+        const loginPage = new LoginPage(page);
+        
+
         const productName = "ZARA COAT 3"
+        const products = page.locator(".card-body");
         const naviButton = page.locator("[class='btn btn-custom']");
         const paymentFields = page.locator("input[type='text']");
 
         await page.goto("https://rahulshettyacademy.com/client");
-        await userName.fill(email);
-        await passField.fill(password);
-        await loginButton.click();
+        loginPage.validLogin(email, password);
         await products.first().waitFor();
 
         const count = await products.count();
